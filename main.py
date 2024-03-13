@@ -16,7 +16,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        game.update()
+        # game.update()
+        game.put_tower()
         game.draw()
 
         pygame.display.flip()
