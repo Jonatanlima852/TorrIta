@@ -16,8 +16,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        # game.update()
-        game.put_tower()
+        # Atualizações do jogo
+        game.update()
+
+        # Desenho na Tela 
+        screen.fill((0, 0, 0))  # Preenche a tela com preto
         game.draw()
 
         pygame.display.flip()

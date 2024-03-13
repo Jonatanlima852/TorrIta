@@ -1,4 +1,5 @@
 import pygame
+from src.entities.towers.tower import Tower
 
 class Player:
     def __init__(self, x, y):
@@ -9,7 +10,11 @@ class Player:
         self.speed = 5
         self.towers = []
 
-    # def update(self):
+
+    def update(self):
+        self.update_towers()
+        self.update_coins()
+        self.update_life()
     #     keys = pygame.key.get_pressed()
     #     if keys[pygame.K_LEFT]:
     #         self.x -= self.speed
@@ -20,12 +25,23 @@ class Player:
     #     if keys[pygame.K_DOWN]:
     #         self.y += self.speed
 
+
     def draw(self, screen):
         for tower in self.towers:
-            pygame.draw.rect(screen, self.color, (tower['x'], tower["y"], self.size, self.size))
+            pygame.draw.rect(screen, self.color, (tower.x, tower.y, tower.size, tower.size))
 
-    def put_tower(self, screen):
+
+    def update_towers(self):
         # self.last_mouse_click  = pygame.mouse.get_pressed()
         if pygame.mouse.get_pressed()[0]:  # Botão esquerdo do mouse
             x, y = pygame.mouse.get_pos()
-            self.towers.append({'x':x, 'y':y})
+            new_tower = Tower(x, y, 10)
+            self.towers.append(new_tower)
+
+
+    def update_coins(self):
+        pass
+
+
+    def update_life(self):
+        pass
