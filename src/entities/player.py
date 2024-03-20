@@ -1,14 +1,17 @@
 import pygame
 from src.entities.towers.tower import Tower
-
+from src.ui.grid import Grid
 class Player:
     def __init__(self, x, y):
         self.x = x
         self.y = y
         self.size = 10
         self.color = (255, 0, 0)  # Vermelho
+        self.color_weak = (100, 0, 0)  # Vermelho fraco
         self.speed = 5
         self.towers = []
+        self.grid = Grid()
+
 
 
     def update(self):
@@ -27,15 +30,21 @@ class Player:
 
 
     def draw(self, screen):
+        x, y = pygame.mouse.get_pos()
+        size = 60
+        x, y = self.grid.retify_to_grid(x, y)
+        pygame.draw.rect(screen, self.color, (x, y, size, size))
+
         for tower in self.towers:
-            pygame.draw.rect(screen, self.color, (tower.x, tower.y, tower.size, tower.size))
+            pygame.draw.rect(screen, self.color_weak, (tower.x, tower.y, tower.size, tower.size))
 
 
     def update_towers(self):
         # self.last_mouse_click  = pygame.mouse.get_pressed()
         if pygame.mouse.get_pressed()[0]:  # Botão esquerdo do mouse
             x, y = pygame.mouse.get_pos()
-            new_tower = Tower(x, y, 10)
+            x, y = self.grid.retify_to_grid(x, y)
+            new_tower = Tower(x, y, 60)
             self.towers.append(new_tower)
 
 

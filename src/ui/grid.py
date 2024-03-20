@@ -1,13 +1,14 @@
 import pygame
+from src.settings import SCREEN_WIDTH
 
 class Grid:
     def __init__(self):
         # Definição do grid
-        self.matriz_ocupacao = [[False] * 6 for _ in range(4)]
+        self.matriz_ocupacao = [[False] * 12 for _ in range(8)]
 
         # Parâmetros do retângulo
-        self.x_inicial = 40
-        self.largura = 720
+        self.x_inicial = 0
+        self.largura = SCREEN_WIDTH
         self.y_inicial = 120
         self.altura = 480
 
@@ -21,9 +22,9 @@ class Grid:
 
     # Desenha as linhas do grid na tela
     def desenhar_linhas(self, screen):
-        for x in range(160, 761, 120):
+        for x in range(self.x_inicial, self.x_inicial + self.largura, 60):
             pygame.draw.line(screen, self.preto, (x, 120), (x, 600))
-        for y in range(120, 601, 120):
+        for y in range(self.y_inicial, 601, 60):
             pygame.draw.line(screen, self.preto, (40, y), (760, y))
 
     # Verificar se a celula está vazia
@@ -44,3 +45,10 @@ class Grid:
     # Reinicia a matriz para o inicio
     def limpar_matriz(self):
         self.matriz_ocupacao = [[False] * 6 for _ in range(4)]
+
+    def retify_to_grid(self, x, y):
+        resto_x = (x - self.x_inicial) // 60
+        resto_y = (y - self.y_inicial) // 60
+        x_grid = self.x_inicial + 60*resto_x
+        y_grid = self.y_inicial + 60*resto_y
+        return x_grid, y_grid
