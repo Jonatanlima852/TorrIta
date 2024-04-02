@@ -10,6 +10,7 @@ class Game:
         self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.attack  = Attack()
         self.grid = Grid()
+    
 
     def update(self):
         self.player.update()
