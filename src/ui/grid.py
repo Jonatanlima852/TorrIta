@@ -3,7 +3,7 @@ import pygame
 class Grid:
     def __init__(self):
         # Definição do grid
-        self.matriz_ocupacao = [[False] * 6 for _ in range(4)]
+        self.matriz_ocupacao = [[False] * 6 for _ in range(6)]
 
         # Parâmetros do retângulo
         self.x_inicial = 40
@@ -23,7 +23,7 @@ class Grid:
     def desenhar_linhas(self, screen):
         for x in range(160, 761, 120):
             pygame.draw.line(screen, self.preto, (x, 120), (x, 600))
-        for y in range(120, 601, 120):
+        for y in range(120, 601, 80):
             pygame.draw.line(screen, self.preto, (40, y), (760, y))
 
     # Verificar se a celula está vazia
@@ -43,13 +43,13 @@ class Grid:
 
     # Reinicia a matriz para o inicio
     def limpar_matriz(self):
-        self.matriz_ocupacao = [[False] * 6 for _ in range(4)]
+        self.matriz_ocupacao = [[False] * 6 for _ in range(6)]
     
     # Analisa se o click foi em uma posição válida e altera a função célula ocupada
     def Posicao_click(self, x, y):
         if x in range(40, 761) and y in range(120, 601):
             posicao_x = (x - 40) // 120
-            posicao_y = (y - 120) // 120
+            posicao_y = (y - 120) // 80
             self.celula_ocupar(posicao_y, posicao_x)
 
             return True, posicao_x, posicao_y
