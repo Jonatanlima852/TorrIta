@@ -55,4 +55,3 @@ class Grid:
             return True, posicao_x, posicao_y
         else:
             return False
-
