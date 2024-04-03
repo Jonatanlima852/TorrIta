@@ -52,7 +52,7 @@ class Player:
             x, y = pygame.mouse.get_pos()
             allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
             if allowed:
-                new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid)
+                new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20)
                 self.towers.append(new_tower)
 
 
