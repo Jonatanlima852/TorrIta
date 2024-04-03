@@ -1,5 +1,7 @@
 import pygame
+import random
 from src.entities.enemies.enemy import Enemy
+from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Attack:
     def __init__(self):
@@ -39,5 +41,6 @@ class Attack:
         if actual_time - self.time_of_last_enemy >= self.interval:
             # Atualize o tempo anterior para o momento atual e cria um novo inimigo
             self.time_of_last_enemy = actual_time
-            new_enemy = Enemy(20)
+            value = int(random.randint(2,6)*(SCREEN_HEIGHT/6))
+            new_enemy = Enemy(value, SCREEN_WIDTH, 20)
             self.enemies.append(new_enemy)
