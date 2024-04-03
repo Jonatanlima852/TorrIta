@@ -1,16 +1,17 @@
 import pygame
-from src.settings import SCREEN_WIDTH
+from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Grid:
-    def __init__(self):
+    def __init__(self, borda_sup, borda_lat, num_of_lines, num_of_columns):
         # Definição do grid
-        self.matriz_ocupacao = [[False] * 6 for _ in range(6)]
-
+        self.matriz_ocupacao = [[False] * 9 for _ in range(5)]
         # Parâmetros do retângulo
-        self.x_inicial = 0
-        self.largura = SCREEN_WIDTH
-        self.y_inicial = 120
-        self.altura = 480
+        self.x_inicial = borda_lat
+        self.largura = SCREEN_WIDTH - 2*borda_lat
+        self.y_inicial = borda_sup
+        self.altura = SCREEN_HEIGHT - borda_sup
+        self.num_of_lines = num_of_lines
+        self.num_of_columns = num_of_columns
 
         # Definição de cores
         self.verde_escuro = (34, 139, 34)
@@ -22,10 +23,15 @@ class Grid:
 
     # Desenha as linhas do grid na tela
     def desenhar_linhas(self, screen):
-        for x in range(self.x_inicial, self.x_inicial + self.largura, 60):
-            pygame.draw.line(screen, self.preto, (x, 120), (x, 600))
-        for y in range(120, 601, 80):
-            pygame.draw.line(screen, self.preto, (40, y), (760, y))
+        #for x in range(self.x_inicial, self.largura, int(self.largura//self.num_of_lines)):
+        for k in range(0, self.num_of_columns):
+            x = self.x_inicial + k * self.largura//self.num_of_columns
+            pygame.draw.line(screen, self.preto, (x, self.y_inicial), (x, self.altura + self.y_inicial))
+            
+        for k in range(0, self.num_of_lines):
+            y = self.y_inicial + k * self.altura//self.num_of_lines
+        #for y in range(self.y_inicial, int(self.altura , int(self.altura//self.num_of_columns)):
+            pygame.draw.line(screen, self.preto, (self.x_inicial, y), (self.x_inicial + self.largura, y))
 
     # Verificar se a celula está vazia
     def verificar_celula_ocupada(self, linha, coluna):
@@ -44,7 +50,7 @@ class Grid:
 
     # Reinicia a matriz para o inicio
     def limpar_matriz(self):
-        self.matriz_ocupacao = [[False] * 6 for _ in range(6)]
+        self.matriz_ocupacao = [[False] * 9 for _ in range(5)]
     
     # Analisa se o click foi em uma posição válida e altera a função célula ocupada
     def Posicao_click(self, x, y):
@@ -56,9 +62,12 @@ class Grid:
             return True, posicao_x, posicao_y
         else:
             return False
+        
     def retify_to_grid(self, x, y):
-        resto_x = (x - self.x_inicial) // 60
-        resto_y = (y - self.y_inicial) // 60
-        x_grid = self.x_inicial + 60*resto_x
-        y_grid = self.y_inicial + 60*resto_y
-        return x_grid, y_grid
+        resto_x = (x - self.x_inicial) // (self.largura/self.num_of_columns) #(x - self.x_inicial) // 60
+        resto_y = (y - self.y_inicial) // (self.altura/self.num_of_lines) #(y - self.y_inicial) // 60
+        x_grid = self.x_inicial + (self.largura/self.num_of_columns)*resto_x
+        y_grid = self.y_inicial + (self.altura/self.num_of_lines)*resto_y
+        if self.x_inicial <= x <= self.x_inicial + self.largura and self.y_inicial <= y <= self.y_inicial + self.altura:
+            return True, x_grid, y_grid
+        return False, x_grid, y_grid

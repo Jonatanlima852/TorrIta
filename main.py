@@ -17,7 +17,6 @@ def main():
     game = Game(screen)
 
     running = True
-    # game_paused = False
 
     while running:
         for event in pygame.event.get():
@@ -47,3 +46,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    

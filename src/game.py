@@ -7,9 +7,9 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 class Game:
     def __init__(self, screen):
         self.screen = screen
-        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH/11, SCREEN_HEIGHT/6)
         self.attack  = Attack()
-        self.grid = Grid()
+        self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)
     
 
     def update(self):

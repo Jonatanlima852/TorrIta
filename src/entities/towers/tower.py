@@ -1,8 +1,9 @@
 import pygame
 
 class Tower:
-    def __init__(self, x, y, size):
+    def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.range_radius = 10
-        self.size = size
+        self.width = width
+        self.height = height
