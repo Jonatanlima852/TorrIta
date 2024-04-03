@@ -7,7 +7,7 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 class Game:
     def __init__(self, screen):
         self.screen = screen
-        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH/11, SCREEN_HEIGHT/6)
+        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH/11, SCREEN_HEIGHT/6,)
         self.attack  = Attack()
         self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)
     
@@ -17,7 +17,8 @@ class Game:
         self.attack.update()
 
     def draw(self):
-        self.grid.desenhar_retangulo(self.screen)
-        self.grid.desenhar_linhas(self.screen)
+        # self.grid.desenhar_retangulo(self.screen)
+        # self.grid.desenhar_linhas(self.screen)
+        self.grid.desenhar_fundo(self.screen)
         self.player.draw(self.screen)
         self.attack.draw(self.screen)

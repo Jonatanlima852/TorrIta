@@ -17,21 +17,28 @@ class Grid:
         self.verde_escuro = (34, 139, 34)
         self.preto = (0, 0, 0)
 
-    # Desenha o retângulo na tela
-    def desenhar_retangulo(self, screen):
-        pygame.draw.rect(screen, self.verde_escuro, (self.x_inicial, self.y_inicial, self.largura, self.altura))
+        # Colocando imagem de fundo
+        self.background_image = pygame.image.load("assets/images/grama.png")  # Atualize com o caminho correto para sua imagem
+        self.background_image = pygame.transform.scale(self.background_image, (self.largura, self.altura))  # Ajusta a imagem ao tamanho da tela
 
-    # Desenha as linhas do grid na tela
-    def desenhar_linhas(self, screen):
-        #for x in range(self.x_inicial, self.largura, int(self.largura//self.num_of_lines)):
-        for k in range(0, self.num_of_columns):
-            x = self.x_inicial + k * self.largura//self.num_of_columns
-            pygame.draw.line(screen, self.preto, (x, self.y_inicial), (x, self.altura + self.y_inicial))
+    def desenhar_fundo(self, screen):
+        screen.blit(self.background_image, (self.x_inicial, self.y_inicial))
+
+    # # Desenha o retângulo na tela
+    # def desenhar_retangulo(self, screen):
+    #     pygame.draw.rect(screen, self.verde_escuro, (self.x_inicial, self.y_inicial, self.largura, self.altura))
+
+    # # Desenha as linhas do grid na tela
+    # def desenhar_linhas(self, screen):
+    #     #for x in range(self.x_inicial, self.largura, int(self.largura//self.num_of_lines)):
+    #     for k in range(0, self.num_of_columns):
+    #         x = self.x_inicial + k * self.largura//self.num_of_columns
+    #         pygame.draw.line(screen, self.preto, (x, self.y_inicial), (x, self.altura + self.y_inicial))
             
-        for k in range(0, self.num_of_lines):
-            y = self.y_inicial + k * self.altura//self.num_of_lines
-        #for y in range(self.y_inicial, int(self.altura , int(self.altura//self.num_of_columns)):
-            pygame.draw.line(screen, self.preto, (self.x_inicial, y), (self.x_inicial + self.largura, y))
+    #     for k in range(0, self.num_of_lines):
+    #         y = self.y_inicial + k * self.altura//self.num_of_lines
+    #     #for y in range(self.y_inicial, int(self.altura , int(self.altura//self.num_of_columns)):
+    #         pygame.draw.line(screen, self.preto, (self.x_inicial, y), (self.x_inicial + self.largura, y))
 
     # Verificar se a celula está vazia
     def verificar_celula_ocupada(self, linha, coluna):
