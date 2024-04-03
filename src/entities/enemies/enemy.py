@@ -8,7 +8,7 @@ class Enemy:
         self.y = y
         self.size = size
         self.color = pygame.Color('blue')
-        self.speed = 2
+        self.speed = 5
         self.health = health #PRECISA DISSO
         self.damage = damage
 

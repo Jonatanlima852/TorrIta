@@ -41,6 +41,6 @@ class Attack:
         if actual_time - self.time_of_last_enemy >= self.interval:
             # Atualize o tempo anterior para o momento atual e cria um novo inimigo
             self.time_of_last_enemy = actual_time
-            value = int(random.randint(2,6)*(SCREEN_HEIGHT/6))
-            new_enemy = Enemy(value, SCREEN_WIDTH, 20, 20, 20)
+            value = int((random.randint(1,5)*(SCREEN_HEIGHT/6)) + SCREEN_HEIGHT/12)
+            new_enemy = Enemy(SCREEN_WIDTH, value, 20, 20, 20)
             self.enemies.append(new_enemy)
