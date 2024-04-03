@@ -62,8 +62,8 @@ class Grid:
     # Analisa se o click foi em uma posição válida e altera a função célula ocupada
     def Posicao_click(self, x, y):
         if x in range(40, 761) and y in range(120, 601):
-            posicao_x = (x - 40) // 120
-            posicao_y = (y - 120) // 80
+            posicao_x = (x - 40) // 80
+            posicao_y = (y - 120) // 100
             self.celula_ocupar(posicao_y, posicao_x)
 
             return True, posicao_x, posicao_y
