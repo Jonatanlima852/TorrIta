@@ -8,3 +8,7 @@ class Tower:
         self.width = width
         self.height = height
         self.health = health
+
+    def update(self):
+        if self.health <= 0 :
+            self.kill()
