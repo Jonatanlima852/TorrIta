@@ -13,7 +13,6 @@ def main():
     
     menu = Menu(screen)
     menu.main_menu()  # Exibe o menu principal antes de iniciar o jogo
-    hud = HUD(screen)
 
     clock = pygame.time.Clock()
     game = Game(screen)
@@ -35,7 +34,6 @@ def main():
             # Desenho na Tela 
             screen.fill((0, 0, 0))  # Preenche a tela com preto
             game.draw()
-            hud.draw()
 
             menu.pause_button.draw()
             menu.pause_button.verify_click()

@@ -5,16 +5,12 @@ from src.ui.grid import Grid
 
 DEBOUNCE_INTERVAL = 500
 class Player:
-    def __init__(self, x, y, width_of_grid, height_of_grid):
-        self.x = x
-        self.y = y
-        self.size = 10
-        self.color = (255, 0, 0)  # Vermelho
-        self.color_weak = (100, 0, 0)  # Vermelho fraco
-        self.speed = 5
+    def __init__(self, grid, hud, width_of_grid, height_of_grid):
         self.towers = []
         self.bullets = []
-        self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)  # Verificar se é possível melhorar a lógica disso
+        self.grid = grid  # Verificar se é possível melhorar a lógica disso
+        self.hud = hud  # Verificar se é possível melhorar a lógica disso
+        self.money = self.hud.money # Dinheiro inicial, pode ser modificado ou ajustado conforme a dificuldade
         self.width_of_grid = width_of_grid
         self.height_of_grid = height_of_grid
         self.image_tower_opaque = pygame.image.load("assets/images/planta.png").convert_alpha() #.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) # Exemplo para 50% de opacidade
@@ -37,30 +33,21 @@ class Player:
         self.update_bullets(enemies)
         self.update_coins()
         self.update_life()
-    #     keys = pygame.key.get_pressed()
-    #     if keys[pygame.K_LEFT]:
-    #         self.x -= self.speed
-    #     if keys[pygame.K_RIGHT]:
-    #         self.x += self.speed
-    #     if keys[pygame.K_UP]:
-    #         self.y -= self.speed
-    #     if keys[pygame.K_DOWN]:
-    #         self.y += self.speed
 
 
     def draw(self, screen):
         # Desenha prévia da Torre
         x, y = pygame.mouse.get_pos()
         allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
-        if allowed:
+        if allowed and self.money >= 100:
             # pygame.draw.rect(screen, self.color, (x_ret, y_ret, w, h))
             screen.blit(self.image_tower_opaque, (x_ret, y_ret))
             screen.blit(self.surface_transparent, (x_ret, y_ret))
 
+
         # Desenha todas as torres do jogo
         for tower in self.towers:
             screen.blit(tower.background_image, (tower.x, tower.y))
-            # pygame.draw.rect(screen, self.color_weak, (tower.x, tower.y, tower.width, tower.height))
         # Desenha todas as balas do jogo
         for bullet in self.bullets:
             if bullet.active:
@@ -76,10 +63,12 @@ class Player:
                 x, y = pygame.mouse.get_pos()
                 allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
 
-                if allowed:
+                if allowed and self.money >= 100:
                     background_image = pygame.image.load("assets/images/planta.png").convert_alpha()  # Atualize com o caminho correto para sua imagem
                     background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
                     new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, background_image)
+                    self.money -= 100
+                    self.hud.update_money(self.money)
                     self.towers.append(new_tower)
                     self.grid.celula_ocupar(x, y)
                     self.last_click_time = current_time

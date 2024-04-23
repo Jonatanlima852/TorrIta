@@ -1,11 +1,11 @@
 import pygame
 
 class HUD:
-    def __init__(self, screen):
+    def __init__(self, screen, money):
         self.screen = screen
         self.font = pygame.font.SysFont("Arial", 24)
         self.defense_buttons = []
-        self.money = 1000
+        self.money = money
         self.init_defense_buttons()
         self.pause_button = None
         coin_image = pygame.image.load('assets/images/coin.png').convert_alpha()
@@ -41,4 +41,7 @@ class HUD:
 
         if self.pause_button:
             self.pause_button.draw()
+
+    def update_money(self, new_money):
+        self.money = new_money
 
