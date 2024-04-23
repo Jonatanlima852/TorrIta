@@ -16,6 +16,7 @@ class Menu:
         pause_button_image = pygame.image.load('pause.png').convert_alpha()
         self.pause_button = Button(SCREEN_WIDTH - 80, 10, pause_button_image, 0.1, self.screen)
         self.game_paused = False
+        self.selected_difficulty = "normal"
 
 
     def draw_text(self, center_x, center_y, text, font, screen, color=(255, 255, 255)):
@@ -68,20 +69,20 @@ class Menu:
                         easy_button.select()
                         normal_button.deselect()
                         hard_button.deselect()
-                        selected_difficulty = "easy"
+                        self.selected_difficulty = "easy"
                     elif normal_button.rect.collidepoint(event.pos):
                         normal_button.select()
                         easy_button.deselect()
                         hard_button.deselect()
-                        selected_difficulty = "normal"
+                        self.selected_difficulty = "normal"
                     elif hard_button.rect.collidepoint(event.pos):
                         hard_button.select()
                         easy_button.deselect()
                         normal_button.deselect()
-                        selected_difficulty = "hard"
+                        self.selected_difficulty = "hard"
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        return  selected_difficulty
+                        return  
 
             clock.tick(60)
 

@@ -6,12 +6,13 @@ from src.ui.hud import HUD  # Garanta que esteja importando corretamente baseado
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Game:
-    def __init__(self, screen):
+    def __init__(self, screen, dificuldade):
         self.screen = screen
-        self.attack  = Attack()
+        self.attack  = Attack(dificuldade)
         self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)
         self.hud = HUD(screen, 1000)  # Inicializa o HUD
         self.player = Player(self.grid, self.hud, SCREEN_WIDTH/11, SCREEN_HEIGHT/6,)
+        self.dificuldade = dificuldade
 
 
     

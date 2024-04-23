@@ -15,7 +15,7 @@ def main():
     menu.main_menu()  # Exibe o menu principal antes de iniciar o jogo
 
     clock = pygame.time.Clock()
-    game = Game(screen)
+    game = Game(screen, menu.selected_difficulty)
 
     running = True
 

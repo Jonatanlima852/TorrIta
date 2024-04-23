@@ -4,7 +4,7 @@ from src.entities.enemies.enemy import Enemy
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Attack:
-    def __init__(self):
+    def __init__(self, dificuldade):
         # self.x = x
         # self.y = y
         # self.size = 10
@@ -13,6 +13,7 @@ class Attack:
         self.enemies = []
         self.time_of_last_enemy = 0
         self.interval = 8000
+        self.dificuldade = dificuldade
 
 
     def update(self):
@@ -43,10 +44,17 @@ class Attack:
             self.time_of_last_enemy = actual_time
             value = int((random.randint(1, 5) * (SCREEN_HEIGHT / 6)))
             rand = int(random.randint(1,4))
+            if self.dificuldade == "easy":
+                fator = 1
+            elif self.dificuldade == "normal":
+                fator = 1.2
+            elif self.dificuldade == "hard":
+                fator = 1.4
+
             if rand != 2:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, 50, 20)
+                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*50, fator*20)
             else:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, 80, 20)
+                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*80, fator*20)
             self.enemies.append(new_enemy)
         
         self.enemies = [enemy for enemy in self.enemies if enemy.active]
