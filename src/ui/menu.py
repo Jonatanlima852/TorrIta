@@ -119,8 +119,8 @@ class Menu:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if botao_voltar.rect.collidepoint(event.pos):
                         self.game_paused = False
-                        self.main_menu()  # Chama o menu principal diretamente
-                        return
+                        #self.main_menu()  # Chama o menu principal diretamente
+                        return "restart"
                     elif botao_sair.rect.collidepoint(event.pos):
                         pygame.quit()
                         sys.exit()

@@ -25,7 +25,9 @@ def main():
                 running = False
 
         if menu.game_paused:
-            menu.pause_menu()
+            reiniciar = menu.pause_menu() 
+            if reiniciar == "restart":
+                main()
 
         else:
             # Atualizações do jogo
