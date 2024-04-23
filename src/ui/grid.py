@@ -24,22 +24,6 @@ class Grid:
     def desenhar_fundo(self, screen):
         screen.blit(self.background_image, (self.x_inicial, self.y_inicial))
 
-    # # Desenha o retângulo na tela
-    # def desenhar_retangulo(self, screen):
-    #     pygame.draw.rect(screen, self.verde_escuro, (self.x_inicial, self.y_inicial, self.largura, self.altura))
-
-    # # Desenha as linhas do grid na tela
-    # def desenhar_linhas(self, screen):
-    #     #for x in range(self.x_inicial, self.largura, int(self.largura//self.num_of_lines)):
-    #     for k in range(0, self.num_of_columns):
-    #         x = self.x_inicial + k * self.largura//self.num_of_columns
-    #         pygame.draw.line(screen, self.preto, (x, self.y_inicial), (x, self.altura + self.y_inicial))
-            
-    #     for k in range(0, self.num_of_lines):
-    #         y = self.y_inicial + k * self.altura//self.num_of_lines
-    #     #for y in range(self.y_inicial, int(self.altura , int(self.altura//self.num_of_columns)):
-    #         pygame.draw.line(screen, self.preto, (self.x_inicial, y), (self.x_inicial + self.largura, y))
-
     # Verificar se a celula está vazia
     def verificar_celula_ocupada(self, linha, coluna):
         if self.matriz_ocupacao[linha][coluna] == False:
@@ -60,17 +44,6 @@ class Grid:
     # Reinicia a matriz para o inicio
     def limpar_matriz(self):
         self.matriz_ocupacao = [[False] * 5 for _ in range(9)]
-    
-    # # Analisa se o click foi em uma posição válida e altera a função célula ocupada
-    # def Posicao_click(self, x, y):
-    #     if x in range(40, 761) and y in range(120, 601):
-    #         posicao_x = (x - 40) // 80
-    #         posicao_y = (y - 120) // 100
-    #         self.celula_ocupar(posicao_y, posicao_x)
-
-    #         return True, posicao_x, posicao_y
-    #     else:
-    #         return False
         
     def retify_to_grid(self, x, y):
         quociente_x = int((x - self.x_inicial) // (self.largura/self.num_of_columns)) #(x - self.x_inicial) // 60
