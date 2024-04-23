@@ -27,22 +27,61 @@ class Menu:
         font = pygame.font.SysFont(None, 56)
         clock = pygame.time.Clock()
         running = True
+        easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50, font, (255, 255, 255), (100, 100, 255))
+        normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, (255, 255, 255), (100, 100, 255))
+        hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, (255, 255, 255), (100, 100, 255))
+
+        easy_button.deselect()
+        normal_button.deselect()
+        hard_button.deselect()
+
+
 
         while running:
             self.screen.fill((0, 0, 0))  # Preenche a tela com preto
 
+            #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen)
+            #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Start", font, self.screen)
+
+            # Desenha o título do jogo
             self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen)
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Start", font, self.screen)
+        
+        # Instrução para escolha da dificuldade
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Escolha a Dificuldade:", font, self.screen)
+        
+        # Desenha instrução para iniciar o jogo
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 200, "Pressione ESPAÇO para Iniciar", font, self.screen)
+
+            posicao_mouse = pygame.mouse.get_pos()
+            for button in [easy_button, normal_button, hard_button]:
+                button.check_hover(posicao_mouse)
+                button.draw()
 
             pygame.display.flip()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    return
-                if event.type == pygame.KEYDOWN:
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if easy_button.rect.collidepoint(event.pos):
+                        easy_button.select()
+                        normal_button.deselect()
+                        hard_button.deselect()
+                        selected_difficulty = "easy"
+                    elif normal_button.rect.collidepoint(event.pos):
+                        normal_button.select()
+                        easy_button.deselect()
+                        hard_button.deselect()
+                        selected_difficulty = "normal"
+                    elif hard_button.rect.collidepoint(event.pos):
+                        hard_button.select()
+                        easy_button.deselect()
+                        normal_button.deselect()
+                        selected_difficulty = "hard"
+                elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        return  # Começa o jogo
+                        return  selected_difficulty
 
             clock.tick(60)
 

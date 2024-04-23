@@ -27,7 +27,7 @@ class Button:
             self.clicked = False
 
 class ButtonEscrito:
-    def __init__(self, screen, text, x, y, font, color_normal, color_hover, center=True):
+    def __init__(self, screen, text, x, y, font, color_normal, color_hover, color_selected=(255, 255, 0), center=True):
         self.screen = screen
         self.text = text
         self.x = x
@@ -35,8 +35,10 @@ class ButtonEscrito:
         self.font = font
         self.color_normal = color_normal
         self.color_hover = color_hover
+        self.color_selected = color_selected
         self.center = center
         self.color = self.color_normal
+        self.selected = False
         self.render_text()
 
     def render_text(self):
@@ -51,9 +53,21 @@ class ButtonEscrito:
         self.screen.blit(self.text_rendered, self.rect)
 
     def check_hover(self, mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
+        if self.rect.collidepoint(mouse_pos) and not self.selected:
             self.color = self.color_hover
         else:
             self.color = self.color_normal
+        if self.selected:
+            self.color = self.color_selected
+        self.render_text()
+
+    def select(self):
+        self.selected = True
+        self.color = self.color_selected
+        self.render_text()
+    
+    def deselect(self):
+        self.selected = False
+        self.color = self.color_normal
         self.render_text()
         
