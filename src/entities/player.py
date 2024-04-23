@@ -3,7 +3,7 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from src.entities.towers.tower import Tower
 from src.ui.grid import Grid
 
-DEBOUNCE_INTERVAL = 200
+DEBOUNCE_INTERVAL = 500
 class Player:
     def __init__(self, x, y, width_of_grid, height_of_grid):
         self.x = x

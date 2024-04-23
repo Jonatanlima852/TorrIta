@@ -13,8 +13,8 @@ class Game:
     
 
     def update(self):
-        self.player.update(self.attack.enemies)
         self.attack.update()
+        self.player.update(self.attack.enemies)
     
     def draw(self):
         # self.grid.desenhar_retangulo(self.screen)

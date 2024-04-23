@@ -11,7 +11,7 @@ class Tower:
         self.health = health
         self.background_image = background_image
         self.last_shot_time = pygame.time.get_ticks()  # Armazena o momento do último tiro
-        self.shot_interval = 1000  # Intervalo em milissegundos
+        self.shot_interval = 2000  # Intervalo em milissegundos
         #self.background_image_opaque = background_image.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) # Exemplo para 50% de opacidade
 
     def update(self):
@@ -22,7 +22,7 @@ class Tower:
         # Assumindo que a torre atira horizontalmente para a direita e aparece no centro da torre
         bullet_x = self.x + self.width // 2
         bullet_y = self.y + self.height // 2
-        new_bullet = Bullet(bullet_x, bullet_y, size=5, speed=5, damage=10, durability=1)
+        new_bullet = Bullet(bullet_x, bullet_y, size=20, speed=2, damage=10, durability=1)
         return new_bullet
     
     def try_to_shoot(self, current_time):
