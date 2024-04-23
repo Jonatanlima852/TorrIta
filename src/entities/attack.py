@@ -16,8 +16,8 @@ class Attack:
         self.dificuldade = dificuldade
 
 
-    def update(self):
-        self.update_enemies()
+    def update(self, towers):
+        self.update_enemies(towers)
     #     keys = pygame.key.get_pressed()
     #     if keys[pygame.K_LEFT]:
     #         self.x -= self.speed
@@ -34,9 +34,9 @@ class Attack:
             # Desenha a imagem do zumbi na tela ao invés de um retângulo vermelho
             screen.blit(enemy.image, (enemy.x, enemy.y))
 
-    def update_enemies(self):
+    def update_enemies(self, towers):
         for enemy in self.enemies:
-            enemy.update()
+            enemy.update(towers)
 
         actual_time = pygame.time.get_ticks()
         if actual_time - self.time_of_last_enemy >= self.interval:
@@ -52,9 +52,9 @@ class Attack:
                 fator = 1.4
 
             if rand != 2:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*50, fator*20)
+                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*50, fator*20, 0.2)
             else:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*80, fator*20)
+                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*80, fator*20, 0.2)
             self.enemies.append(new_enemy)
         
         self.enemies = [enemy for enemy in self.enemies if enemy.active]

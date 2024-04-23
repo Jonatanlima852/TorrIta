@@ -76,6 +76,8 @@ class Player:
 
         # faz update da torre, mudando estado e atirando
         for tower in self.towers:
+            if not tower.active:
+                self.towers.remove(tower)
             tower.update()
             # Tenta atirar se tiver passado o intervalo de tempo
             bullet = tower.try_to_shoot(current_time)
