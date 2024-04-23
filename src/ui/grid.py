@@ -4,7 +4,7 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 class Grid:
     def __init__(self, borda_sup, borda_lat, num_of_lines, num_of_columns):
         # Definição do grid
-        self.matriz_ocupacao = [[False] * 9 for _ in range(5)]
+        self.matriz_ocupacao = [[False] * 5 for _ in range(9)]
         # Parâmetros do retângulo
         self.x_inicial = borda_lat
         self.largura = SCREEN_WIDTH - 2*borda_lat
@@ -48,7 +48,9 @@ class Grid:
             return True
 
     # Ocupar a célula
-    def celula_ocupar(self, linha, coluna):
+    def celula_ocupar(self, x, y):
+        linha = int((x - self.x_inicial) // (self.largura/self.num_of_columns)) #(x - self.x_inicial) // 60
+        coluna = int((y - self.y_inicial) // (self.altura/self.num_of_lines)) #(y - self.y_inicial) // 60
         self.matriz_ocupacao[linha][coluna] = True
     
     # Limpar célula específica
@@ -57,24 +59,26 @@ class Grid:
 
     # Reinicia a matriz para o inicio
     def limpar_matriz(self):
-        self.matriz_ocupacao = [[False] * 9 for _ in range(5)]
+        self.matriz_ocupacao = [[False] * 5 for _ in range(9)]
     
-    # Analisa se o click foi em uma posição válida e altera a função célula ocupada
-    def Posicao_click(self, x, y):
-        if x in range(40, 761) and y in range(120, 601):
-            posicao_x = (x - 40) // 80
-            posicao_y = (y - 120) // 100
-            self.celula_ocupar(posicao_y, posicao_x)
+    # # Analisa se o click foi em uma posição válida e altera a função célula ocupada
+    # def Posicao_click(self, x, y):
+    #     if x in range(40, 761) and y in range(120, 601):
+    #         posicao_x = (x - 40) // 80
+    #         posicao_y = (y - 120) // 100
+    #         self.celula_ocupar(posicao_y, posicao_x)
 
-            return True, posicao_x, posicao_y
-        else:
-            return False
+    #         return True, posicao_x, posicao_y
+    #     else:
+    #         return False
         
     def retify_to_grid(self, x, y):
-        resto_x = (x - self.x_inicial) // (self.largura/self.num_of_columns) #(x - self.x_inicial) // 60
-        resto_y = (y - self.y_inicial) // (self.altura/self.num_of_lines) #(y - self.y_inicial) // 60
-        x_grid = self.x_inicial + (self.largura/self.num_of_columns)*resto_x
-        y_grid = self.y_inicial + (self.altura/self.num_of_lines)*resto_y
-        if self.x_inicial <= x <= self.x_inicial + self.largura and self.y_inicial <= y <= self.y_inicial + self.altura:
+        quociente_x = int((x - self.x_inicial) // (self.largura/self.num_of_columns)) #(x - self.x_inicial) // 60
+        quociente_y = int((y - self.y_inicial) // (self.altura/self.num_of_lines)) #(y - self.y_inicial) // 60
+        x_grid = self.x_inicial + (self.largura/self.num_of_columns)*quociente_x
+        y_grid = self.y_inicial + (self.altura/self.num_of_lines)*quociente_y
+
+        in_screen = self.x_inicial <= x <= self.x_inicial + self.largura and self.y_inicial <= y <= self.y_inicial + self.altura
+        if in_screen and not self.verificar_celula_ocupada(quociente_x, quociente_y):
             return True, x_grid, y_grid
         return False, x_grid, y_grid

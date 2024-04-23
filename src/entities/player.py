@@ -81,6 +81,7 @@ class Player:
                     background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
                     new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, background_image)
                     self.towers.append(new_tower)
+                    self.grid.celula_ocupar(x, y)
                     self.last_click_time = current_time
 
         for tower in self.towers:
