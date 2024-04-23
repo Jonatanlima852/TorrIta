@@ -47,7 +47,7 @@ class Player:
 
         # Desenha todas as torres do jogo
         for tower in self.towers:
-            screen.blit(tower.background_image, (tower.x, tower.y))
+            tower.draw(screen)
         # Desenha todas as balas do jogo
         for bullet in self.bullets:
             if bullet.active:
@@ -57,6 +57,7 @@ class Player:
     def update_towers(self):
         current_time = pygame.time.get_ticks()
         
+        # Verifica se acrescenta nova torre no jogo
         # self.last_mouse_click  = pygame.mouse.get_pressed()
         if pygame.mouse.get_pressed()[0]:  # Botão esquerdo do mouse
             if current_time - self.last_click_time > DEBOUNCE_INTERVAL:
@@ -64,16 +65,18 @@ class Player:
                 allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
 
                 if allowed and self.money >= 100:
-                    background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
-                    background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
-                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, background_image)
+                    # background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
+                    # background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
+                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
                     self.money -= 100
                     self.hud.update_money(self.money)
                     self.towers.append(new_tower)
                     self.grid.celula_ocupar(x, y)
                     self.last_click_time = current_time
 
+        # faz update da torre, mudando estado e atirando
         for tower in self.towers:
+            tower.update()
             # Tenta atirar se tiver passado o intervalo de tempo
             bullet = tower.try_to_shoot(current_time)
             if bullet:
