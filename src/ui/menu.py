@@ -28,6 +28,8 @@ class Menu:
         font = pygame.font.SysFont(None, 56)
         clock = pygame.time.Clock()
         running = True
+        background_image = pygame.image.load('assets/images/background_menu.png')
+        background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50, font, (255, 255, 255), (100, 100, 255))
         normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, (255, 255, 255), (100, 100, 255))
         hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, (255, 255, 255), (100, 100, 255))
@@ -39,7 +41,7 @@ class Menu:
 
 
         while running:
-            self.screen.fill((0, 0, 0))  # Preenche a tela com preto
+            self.screen.blit(background_image, (0, 0))
 
             #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen)
             #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Start", font, self.screen)
