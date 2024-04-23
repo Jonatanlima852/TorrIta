@@ -90,19 +90,20 @@ class Menu:
             clock.tick(60)
 
     def pause_menu(self):
+        fontpause = pygame.font.SysFont(None, 90)
         font = pygame.font.SysFont(None, 56)
         clock = pygame.time.Clock()
 
         # Botão para sair
-        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, COR_FUNDO, (100, 100, 255))
+        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80, font, COR_FUNDO, (100, 100, 255))
         # Botão para voltar ao menu inicial
-        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, COR_FUNDO, (100, 100, 255))
+        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 , font, COR_FUNDO, (100, 100, 255))
 
         while self.game_paused:
             self.screen.blit(self.background_image, (0, 0))
 
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Paused", font, self.screen, COR_FUNDO)
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Resume", font, self.screen, COR_FUNDO)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "Paused", fontpause, self.screen, COR_FUNDO)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 200, "Press SPACE to Resume", font, self.screen, COR_FUNDO)
 
             # Desenha e verifica se os botões estão sob o mouse
             posicao_mouse = pygame.mouse.get_pos()
