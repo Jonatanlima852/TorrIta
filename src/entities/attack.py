@@ -12,7 +12,7 @@ class Attack:
         # self.speed = 5
         self.enemies = []
         self.time_of_last_enemy = 0
-        self.interval = 1000
+        self.interval = 8000
 
 
     def update(self):
@@ -30,8 +30,8 @@ class Attack:
 
     def draw(self, screen):
         for enemy in self.enemies:
-            pygame.draw.rect(screen, enemy.color, (enemy.x, enemy.y, enemy.size, enemy.size))
-
+            # Desenha a imagem do zumbi na tela ao invés de um retângulo vermelho
+            screen.blit(enemy.image, (enemy.x, enemy.y))
 
     def update_enemies(self):
         for enemy in self.enemies:
@@ -41,6 +41,10 @@ class Attack:
         if actual_time - self.time_of_last_enemy >= self.interval:
             # Atualize o tempo anterior para o momento atual e cria um novo inimigo
             self.time_of_last_enemy = actual_time
-            value = int((random.randint(1,5)*(SCREEN_HEIGHT/6)) + SCREEN_HEIGHT/12)
+            value = int((random.randint(1, 5) * (SCREEN_HEIGHT / 6)) + SCREEN_HEIGHT / 24)
             new_enemy = Enemy(SCREEN_WIDTH, value, 20, 20, 20)
             self.enemies.append(new_enemy)
+
+    def remove_enemy(self, enemy):
+        if enemy in self.enemies:
+            self.enemies.remove(enemy)

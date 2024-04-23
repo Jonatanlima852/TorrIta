@@ -13,9 +13,9 @@ class Game:
     
 
     def update(self):
-        self.player.update()
+        self.player.update(self.attack.enemies)
         self.attack.update()
-
+    
     def draw(self):
         # self.grid.desenhar_retangulo(self.screen)
         # self.grid.desenhar_linhas(self.screen)
