@@ -13,6 +13,8 @@ class Tower:
         self.current_frame = 0
         self.animation_speed = 0.1  # Ajuste isso conforme a velocidade desejada da animação
         self.last_update = pygame.time.get_ticks()
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.active = True
 
         self.last_shot_time = pygame.time.get_ticks()  # Armazena o momento do último tiro
         self.shot_interval = 2000  # Intervalo em milissegundos
@@ -42,3 +44,11 @@ class Tower:
     
     def draw(self, screen):
         screen.blit(self.frames[self.current_frame], (self.x, self.y))
+
+    def take_damage(self, amount):
+        self.health -= amount
+        if self.health <= 0:
+            self.kill()
+    
+    def kill(self):
+        self.active = False

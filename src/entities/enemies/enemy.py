@@ -3,11 +3,11 @@ import sys
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Enemy:
-    def __init__(self, x, y, size, health, damage):
+    def __init__(self, x, y, size, health, damage, speed):
         self.x = x
         self.y = y
         self.size = size
-        self.speed = 0.2
+        self.speed = speed
         self.health = health 
         self.damage = damage
         zombie_walk1 = pygame.image.load("assets/images/zombie/zombie_walk1.png").convert_alpha()
@@ -23,13 +23,28 @@ class Enemy:
         self.animation_counter = 0
         self.rect = pygame.Rect(self.x,self.y+50,size,size)
         self.active = True
+        self.is_attacking = False
+        self.target = None
+        self.last_attack_time = 0
+        self.interval_damage = 1000
 
-    def update(self):
+    def update(self, towers):
+        if not self.is_attacking:
+            self.x -= self.speed  # Move o inimigo horizontalmente
+            self.rect.x = self.x
+
         if not self.active:
             return
         self.animation_state()
-        self.x -= self.speed  # Move o inimigo horizontalmente
-        self.rect.x = self.x
+
+        if self.is_attacking and self.target:
+            self.give_damage(self.target)
+
+        for tower in towers:
+            if self.rect.colliderect(tower.rect):
+                self.is_attacking = True
+                self.target = tower
+                break
         
 
     def animation_state(self):
@@ -41,6 +56,15 @@ class Enemy:
                 self.animation_index = 0
             self.animation_counter = 0  # Reset the counter after updating the frame
 
+    def give_damage(self, tower):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_attack_time >= self.interval_damage:  # ataca a cada segundo
+            self.last_attack_time = current_time
+            tower.take_damage(self.damage)
+            if tower.health <= 0:
+                self.is_attacking = False
+                self.target = None
+    
     def take_damage(self, amount):
         self.health -= amount
         if self.health <= 0:

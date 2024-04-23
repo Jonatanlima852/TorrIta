@@ -18,7 +18,7 @@ class Game:
     
 
     def update(self):
-        self.attack.update()
+        self.attack.update(self.player.towers)
         self.player.update(self.attack.enemies)
     
     def draw(self):
