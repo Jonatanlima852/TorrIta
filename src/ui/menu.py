@@ -5,7 +5,7 @@ from src.utils.button import ButtonEscrito
 from src.entities.player import Player
 from src.entities.attack import Attack
 from src.ui.grid import Grid
-from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT, COR_FUNDO, COR_HOVER
 
 
 
@@ -17,6 +17,8 @@ class Menu:
         self.pause_button = Button(SCREEN_WIDTH - 80, 10, pause_button_image, 0.1, self.screen)
         self.game_paused = False
         self.selected_difficulty = "normal"
+        self.background_image = pygame.image.load('assets/images/background_menu.png').convert()
+        self.background_image = pygame.transform.scale(self.background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
     def draw_text(self, center_x, center_y, text, font, screen, color=(255, 255, 255)):
@@ -28,11 +30,10 @@ class Menu:
         font = pygame.font.SysFont(None, 56)
         clock = pygame.time.Clock()
         running = True
-        background_image = pygame.image.load('assets/images/background_menu.png')
-        background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50, font, (255, 255, 255), (100, 100, 255))
-        normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, (255, 255, 255), (100, 100, 255))
-        hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, (255, 255, 255), (100, 100, 255))
+        easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50, font, COR_FUNDO, COR_HOVER)
+        normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, COR_FUNDO, COR_HOVER)
+        hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, COR_FUNDO, COR_HOVER)
+        self.screen.blit(self.background_image, (0, 0))
 
         easy_button.deselect()
         normal_button.deselect()
@@ -41,19 +42,18 @@ class Menu:
 
 
         while running:
-            self.screen.blit(background_image, (0, 0))
 
             #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen)
             #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Start", font, self.screen)
 
             # Desenha o título do jogo
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen, COR_FUNDO)
         
         # Instrução para escolha da dificuldade
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Escolha a Dificuldade:", font, self.screen)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Escolha a Dificuldade:", font, self.screen, COR_FUNDO)
         
         # Desenha instrução para iniciar o jogo
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 200, "Pressione ESPAÇO para Iniciar", font, self.screen)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 200, "Pressione ESPAÇO para Iniciar", font, self.screen, COR_FUNDO)
 
             posicao_mouse = pygame.mouse.get_pos()
             for button in [easy_button, normal_button, hard_button]:
@@ -93,15 +93,15 @@ class Menu:
         clock = pygame.time.Clock()
 
         # Botão para sair
-        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, (255, 255, 255), (100, 100, 255))
+        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, COR_FUNDO, (100, 100, 255))
         # Botão para voltar ao menu inicial
-        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, (255, 255, 255), (100, 100, 255))
+        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, COR_FUNDO, (100, 100, 255))
 
         while self.game_paused:
-            self.screen.fill((0, 0, 0))  # Preenche a tela com preto
+            self.screen.blit(self.background_image, (0, 0))
 
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Paused", font, self.screen)
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Resume", font, self.screen)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Paused", font, self.screen, COR_FUNDO)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Resume", font, self.screen, COR_FUNDO)
 
             # Desenha e verifica se os botões estão sob o mouse
             posicao_mouse = pygame.mouse.get_pos()
