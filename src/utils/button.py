@@ -27,7 +27,7 @@ class Button:
             self.clicked = False
 
 class ButtonEscrito:
-    def __init__(self, screen, text, x, y, font, color_normal, color_hover, color_selected=(255, 255, 0), center=True):
+    def __init__(self, screen, text, x, y, font, color_normal, color_hover, color_selected=(0, 0, 139), center=True):
         self.screen = screen
         self.text = text
         self.x = x

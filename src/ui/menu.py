@@ -27,12 +27,13 @@ class Menu:
         screen.blit(text_surf, text_rect)
 
     def main_menu(self):
+        fontnome = pygame.font.SysFont(None, 150)
         font = pygame.font.SysFont(None, 56)
         clock = pygame.time.Clock()
         running = True
-        easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 50, font, COR_FUNDO, COR_HOVER)
-        normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100, font, COR_FUNDO, COR_HOVER)
-        hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 150, font, COR_FUNDO, COR_HOVER)
+        easy_button = ButtonEscrito(self.screen, "EASY", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 40, font, COR_FUNDO, COR_HOVER)
+        normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 90, font, COR_FUNDO, COR_HOVER)
+        hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 140, font, COR_FUNDO, COR_HOVER)
         self.screen.blit(self.background_image, (0, 0))
 
         easy_button.deselect()
@@ -47,7 +48,7 @@ class Menu:
             #self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, "Press SPACE to Start", font, self.screen)
 
             # Desenha o título do jogo
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 100, "TorrIta", font, self.screen, COR_FUNDO)
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "TorrIta", fontnome, self.screen, (110, 100, 0))
         
         # Instrução para escolha da dificuldade
             self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50, "Escolha a Dificuldade:", font, self.screen, COR_FUNDO)
