@@ -29,7 +29,7 @@ class Player:
 
 
     def update(self, enemies):
-        self.update_towers()
+        self.update_towers(enemies)
         self.update_bullets(enemies)
         self.update_coins()
         self.update_life()
@@ -54,7 +54,7 @@ class Player:
                 screen.blit(bullet.image, (bullet.x, bullet.y))
             
 
-    def update_towers(self):
+    def update_towers(self, enemies):
         current_time = pygame.time.get_ticks()
         
         # Verifica se acrescenta nova torre no jogo
@@ -76,11 +76,12 @@ class Player:
 
         # faz update da torre, mudando estado e atirando
         for tower in self.towers:
+            # verifica se a torre morreu/está inativa
             if not tower.active:
                 self.towers.remove(tower)
             tower.update()
             # Tenta atirar se tiver passado o intervalo de tempo
-            bullet = tower.try_to_shoot(current_time)
+            bullet = tower.try_to_shoot(current_time, enemies)
             if bullet:
                 self.bullets.append(bullet)
                 

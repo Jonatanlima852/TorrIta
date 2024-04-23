@@ -5,11 +5,6 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Attack:
     def __init__(self, dificuldade):
-        # self.x = x
-        # self.y = y
-        # self.size = 10
-        # self.color = (255, 0, 0)  # Vermelho
-        # self.speed = 5
         self.enemies = []
         self.time_of_last_enemy = 0
         self.interval = 8000
@@ -18,15 +13,6 @@ class Attack:
 
     def update(self, towers):
         self.update_enemies(towers)
-    #     keys = pygame.key.get_pressed()
-    #     if keys[pygame.K_LEFT]:
-    #         self.x -= self.speed
-    #     if keys[pygame.K_RIGHT]:
-    #         self.x += self.speed
-    #     if keys[pygame.K_UP]:
-    #         self.y -= self.speed
-    #     if keys[pygame.K_DOWN]:
-    #         self.y += self.speed
 
 
     def draw(self, screen):

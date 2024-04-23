@@ -35,9 +35,17 @@ class Tower:
         new_bullet = Bullet(bullet_x, bullet_y, size=20, speed=2, damage=10, durability=1)
         return new_bullet
     
-    def try_to_shoot(self, current_time):
+    
+    def verify_to_shoot(self, enemies):
+        for enemy in enemies:
+            if enemy.y == self.y:
+                return True
+        return False
+    
+
+    def try_to_shoot(self, current_time, enemies):
         # Verifica se já passou o tempo suficiente desde o último tiro
-        if current_time - self.last_shot_time > self.shot_interval:
+        if current_time - self.last_shot_time > self.shot_interval and self.verify_to_shoot(enemies):
             self.last_shot_time = current_time
             return self.shoot()
         return None
@@ -52,3 +60,5 @@ class Tower:
     
     def kill(self):
         self.active = False
+
+    
