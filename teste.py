@@ -32,6 +32,7 @@ while running:
         player_pos.x -= 300 * dt
     
         #se fu
+        #se fu
 
     # flip() the display to put your work on screen
     pygame.display.flip()
