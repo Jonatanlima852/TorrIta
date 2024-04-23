@@ -64,7 +64,7 @@ class Player:
                 allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
 
                 if allowed and self.money >= 100:
-                    background_image = pygame.image.load("assets/images/planta.png").convert_alpha()  # Atualize com o caminho correto para sua imagem
+                    background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
                     background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
                     new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, background_image)
                     self.money -= 100
