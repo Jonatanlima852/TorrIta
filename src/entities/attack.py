@@ -1,6 +1,6 @@
 import pygame
 import random
-from src.entities.enemies.enemy import Enemy
+from src.entities.enemies.enemy import Enemy,WeakEnemy
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Attack:
@@ -38,9 +38,9 @@ class Attack:
                 fator = 1.4
 
             if rand != 2:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*50, fator*20, 0.2)
+                new_enemy = WeakEnemy(SCREEN_WIDTH, value, 20, fator*50, fator*20, 0.2)
             else:
-                new_enemy = Enemy(SCREEN_WIDTH, value, 20, fator*80, fator*20, 0.2)
+                new_enemy = WeakEnemy(SCREEN_WIDTH, value, 20, fator*80, fator*20, 0.2)
             self.enemies.append(new_enemy)
         
         self.enemies = [enemy for enemy in self.enemies if enemy.active]
