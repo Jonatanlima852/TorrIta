@@ -7,9 +7,6 @@ from src.entities.attack import Attack
 from src.ui.grid import Grid
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT, COR_FUNDO, COR_HOVER
 
-
-
-
 class Menu:
     def __init__(self, screen):
         self.screen = screen
@@ -35,6 +32,9 @@ class Menu:
         normal_button = ButtonEscrito(self.screen, "NORMAL", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 90, font, COR_FUNDO, COR_HOVER)
         hard_button = ButtonEscrito(self.screen, "HARD", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 140, font, COR_FUNDO, COR_HOVER)
         self.screen.blit(self.background_image, (0, 0))
+        pygame.mixer.music.load('assets/music/menu_music.mp3')  # Substitua 'menu_music.mp3' pelo nome correto do arquivo de música
+        pygame.mixer.music.set_volume(1)  # Ajuste o volume se necessário
+        pygame.mixer.music.play(-1)
 
         easy_button.deselect()
         normal_button.deselect()
@@ -87,7 +87,9 @@ class Menu:
                     if event.key == pygame.K_SPACE:
                         return  
 
+
             clock.tick(60)
+
 
     def pause_menu(self):
         fontpause = pygame.font.SysFont(None, 90)

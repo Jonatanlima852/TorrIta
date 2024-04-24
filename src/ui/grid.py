@@ -18,10 +18,13 @@ class Grid:
         self.preto = (0, 0, 0)
 
         # Colocando imagem de fundo
+        self.background_image_2 = pygame.image.load("assets/images/background_map.png")
+        self.background_image_2 = pygame.transform.scale(self.background_image_2, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.background_image = pygame.image.load("assets/images/grama.png")  # Atualize com o caminho correto para sua imagem
         self.background_image = pygame.transform.scale(self.background_image, (self.largura, self.altura))  # Ajusta a imagem ao tamanho da tela
 
     def desenhar_fundo(self, screen):
+        screen.blit(self.background_image_2, (0,0))
         screen.blit(self.background_image, (self.x_inicial, self.y_inicial))
 
     # Verificar se a celula está vazia
