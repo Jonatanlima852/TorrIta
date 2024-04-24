@@ -147,9 +147,9 @@ class Menu:
         clock = pygame.time.Clock()
 
         # Botão para sair
-        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80, font, COR_FUNDO, (100, 100, 255))
+        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80, font, (255,255,255), (100, 100, 255))
         # Botão para voltar ao menu inicial
-        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, font, COR_FUNDO, (100, 100, 255))
+        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, font, (255,255,255), (100, 100, 255))
 
         running = True
         while running:
