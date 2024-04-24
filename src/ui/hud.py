@@ -53,9 +53,9 @@ class HUD:
         money_display_x = coin_x + self.coin_image.get_width() + 5
         money_display = self.font.render(f"{self.money}", True, (255, 255, 0))
         self.screen.blit(money_display, (money_display_x, coin_y))
-        heart_display_x = coin_x + 3 + self.heart_image.get_width() + 5
-        heart_display = self.font.render(f"Vidas: {self.life}", True, (255, 255, 255))
-        self.screen.blit(heart_display, (heart_display_x, coin_y))
+        heart_display_x = coin_x + self.heart_image.get_width() + 15
+        heart_display = self.font.render(f"{self.life}", True, (255, 255, 255))
+        self.screen.blit(heart_display, (heart_display_x, coin_y + 30))
 
         for button, defense_image in zip(self.defense_buttons, self.defense_images):
             button_width = 60
