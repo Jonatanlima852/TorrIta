@@ -2,7 +2,7 @@ import pygame
 from src.entities.player import Player
 from src.entities.attack import Attack
 from src.ui.grid import Grid
-from src.ui.hud import HUD  # Garanta que esteja importando corretamente baseado na sua estrutura de diretório
+from src.ui.hud import HUD 
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Game:
@@ -10,7 +10,7 @@ class Game:
         self.screen = screen
         self.attack  = Attack(dificuldade)
         self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)
-        self.hud = HUD(screen, 1000)  # Inicializa o HUD
+        self.hud = HUD(screen, 1000, 5)
         self.player = Player(self.grid, self.hud, SCREEN_WIDTH/11, SCREEN_HEIGHT/6, self)
         self.dificuldade = dificuldade
 
@@ -22,12 +22,10 @@ class Game:
         self.player.update(self.attack.enemies)
     
     def draw(self):
-        # self.grid.desenhar_retangulo(self.screen)
-        # self.grid.desenhar_linhas(self.screen)
         self.grid.desenhar_fundo(self.screen)
         self.player.draw(self.screen)
         self.attack.draw(self.screen)
-        self.hud.draw()  # Desenha o HUD por cima de tudo
+        self.hud.draw()
 
     def game_over_screen(self):
         font = pygame.font.Font(None, 74)

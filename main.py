@@ -12,7 +12,7 @@ def main():
     pygame.display.set_caption("TorrIta")
     
     menu = Menu(screen)
-    menu.main_menu()  # Exibe o menu principal antes de iniciar o jogo
+    menu.main_menu()
 
     clock = pygame.time.Clock()
     game = Game(screen, menu.selected_difficulty)

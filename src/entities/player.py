@@ -27,7 +27,7 @@ class Player:
         self.surface_transparent.blit(self.image_tower_opaque, (0, 0))  # Desenhe no canto superior esquerdo da superfície transparente
         self.last_click_time = 0
         self.game = game
-        self.life = 5
+        self.life = self.hud.life
 
 
     def update(self, enemies):
@@ -110,6 +110,7 @@ class Player:
         for enemy in enemies:
             if enemy.x < 10:
                 self.life -= 1
+                self.hud.update_life(self.life)
                 enemies. remove(enemy)
         if self.life <= 0:
             self.game_over()
