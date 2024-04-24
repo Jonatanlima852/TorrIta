@@ -38,9 +38,9 @@ class Attack:
                 fator = 1.4
 
             if rand == 1:
-                new_enemy = StrongEnemy(SCREEN_WIDTH, value, 20, fator*50, fator*20, 0.2)
+                new_enemy = StrongEnemy(SCREEN_WIDTH, value, 20, fator*50, fator*20, 1)
             else:
-                new_enemy = WeakEnemy(SCREEN_WIDTH, value, 20, fator*80, fator*20, 0.2)
+                new_enemy = WeakEnemy(SCREEN_WIDTH, value, 20, fator*80, fator*20, 1)
             self.enemies.append(new_enemy)
         
         self.enemies = [enemy for enemy in self.enemies if enemy.active]
