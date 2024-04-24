@@ -1,12 +1,13 @@
 import pygame
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
-from src.entities.towers.tower import Tower
+from src.entities.towers.tower import Tower, MoneyTower
 from src.ui.grid import Grid
 
 DEBOUNCE_INTERVAL = 500
 class Player:
     def __init__(self, grid, hud, width_of_grid, height_of_grid, menu):
         self.towers = []
+        self.money_towers = []
         self.bullets = []
         self.grid = grid  # Verificar se é possível melhorar a lógica disso
         self.hud = hud  # Verificar se é possível melhorar a lógica disso
@@ -45,7 +46,7 @@ class Player:
             {
                 "index": 1,
                 "price": 100,
-                "shot_interval": 10000000,
+                "shot_interval": 100000000,
                 "health": 200,
                 "damage": 0,
                 "bullet_image": pygame.image.load("assets/images/tiro.png").convert_alpha(),
@@ -65,10 +66,10 @@ class Player:
             {
                 "index": 3,
                 "price": 100,
-                "shot_interval": 1000000000,
-                "health": 21,
+                "shot_interval": 10000,
+                "health": 80,
                 "damage": 0,
-                "bullet_image": pygame.transform.scale(pygame.image.load("assets/images/foguinho.png").convert_alpha(), (25,25)),
+                "coin_image": pygame.transform.scale(pygame.image.load("assets/images/coin.png").convert_alpha(), (25,25)),
                 "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/Red_Bull.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
                 "gif": "assets/images/Red_Bull.png",
             }
@@ -98,6 +99,8 @@ class Player:
         # Desenha todas as torres do jogo
         for tower in self.towers:
             tower.draw(screen)
+        for tower in self.money_towers:
+            tower.draw(screen)
         # Desenha todas as balas do jogo
         for bullet in self.bullets:
             if bullet.active:
@@ -118,13 +121,26 @@ class Player:
                 index_defesa = self.hud.selected_defense_index
 
                 if allowed and self.money >= self.defenses[index_defesa]["price"]:
-                    # background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
-                    # background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
-                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, self.defenses[index_defesa]["health"], self.defenses[index_defesa]["shot_interval"], self.defenses[index_defesa]["gif"],self.defenses[index_defesa]["damage"],  self.defenses[index_defesa]["bullet_image"])
-                    # new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
+                    if index_defesa ==  3:  ## If is money Tower  
+                        new_tower = MoneyTower(x_ret, y_ret, self.width_of_grid, 
+                                      self.height_of_grid, self.defenses[index_defesa]["health"], 
+                                      self.defenses[index_defesa]["shot_interval"], 
+                                      self.defenses[index_defesa]["gif"],
+                                      self.defenses[index_defesa]["damage"],  
+                                      self.defenses[index_defesa]["coin_image"])
+                        self.money_towers.append(new_tower)
+
+                    else:
+                        new_tower = Tower(x_ret, y_ret, self.width_of_grid, 
+                                      self.height_of_grid, self.defenses[index_defesa]["health"], 
+                                      self.defenses[index_defesa]["shot_interval"], 
+                                      self.defenses[index_defesa]["gif"],
+                                      self.defenses[index_defesa]["damage"],  
+                                      self.defenses[index_defesa]["bullet_image"])
+                        self.towers.append(new_tower)
+
                     self.money -= self.defenses[index_defesa]["price"]
                     self.hud.update_money(self.money)
-                    self.towers.append(new_tower)
                     self.grid.celula_ocupar(x, y)
                     self.last_click_time = current_time
 
@@ -141,6 +157,18 @@ class Player:
                 bullet = tower.try_to_shoot(current_time, enemies)
                 if bullet:
                     self.bullets.append(bullet)
+
+        # faz update da torre, mudando estado e atirando
+        for tower in self.money_towers[:]:
+            # verifica se a torre morreu/está inativa
+            if not tower.active:
+                self.towers.remove(tower)
+                self.grid.limpar_celula(tower.x, tower.y)
+            else:
+                if tower.generate_money():  # Verifica se gerou dinheiro
+                    self.money += 25
+                    self.hud.update_money(self.money)
+                
                 
 
     def update_bullets(self, enemies):

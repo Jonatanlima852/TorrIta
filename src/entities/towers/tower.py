@@ -2,7 +2,7 @@ import pygame
 from src.entities.bullets.bullet import Bullet
 from src.utils.gif_loader import load_gif_frames
 class Tower:
-    def __init__(self, x, y, width, height, health, shot_interval, background_image, damage, bullet_image):
+    def __init__(self, x, y, width, height, health, shot_interval, background_image, damage, bullet_image=None):
         self.x = x
         self.y = y
         self.range_radius = 10
@@ -61,4 +61,41 @@ class Tower:
     def kill(self):
         self.active = False
 
+
     
+# class MoneyTower(Tower):
+#     def __init__(self, x, y, width, height, health, shot_interval, background_image, damage, coin_image):
+#         self.coin_image = coin_image
+
+#         super().__init__(x, y, width, height, health, shot_interval, background_image, damage)
+
+#     def try_to_shoot(self, current_time, enemies):
+#         return super().try_to_shoot(current_time, enemies)
+
+#     def update_money(self, current_time, player):
+#         if current_time - self.last_shot_time > self.shot_interval:
+#             player.hud.update_money(player.money)
+
+#         super().update_money( current_time, player)
+            
+class MoneyTower(Tower):
+    def __init__(self, x, y, width, height, health, shot_interval, background_image, damage, coin_image):
+        super().__init__(x, y, width, height, health, shot_interval, background_image, damage)
+        self.coin_image = coin_image
+        self.last_money_time = pygame.time.get_ticks()  # Armazena o momento da última geração de dinheiro
+        self.money_interval = 5000  # Intervalo em milissegundos para gerar dinheiro
+        self.money_amount = 10  # Quantidade de dinheiro a ser gerada
+        self.active = True  # A torre está sempre ativa, pois não atira nos inimigos
+
+    def update(self):
+        self.generate_money()  # Gera dinheiro ao longo do tempo
+
+    def generate_money(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_money_time > self.money_interval:
+            # Gera uma moeda na posição da torre
+            self.last_money_time = current_time
+            return True
+        
+    def draw(self, screen):
+        screen.blit(self.frames[self.current_frame], (self.x, self.y))
