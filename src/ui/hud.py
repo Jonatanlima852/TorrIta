@@ -11,23 +11,37 @@ class HUD:
         coin_image = pygame.image.load('assets/images/coin.png').convert_alpha()
         hud_image = pygame.image.load('assets/images/hud.png').convert_alpha()
         self.coin_image = pygame.transform.scale(coin_image, (32, 32))
+        self.defense_images = [pygame.image.load('assets/images/planta.png').convert_alpha(),
+                               pygame.image.load('assets/images/planta.png').convert_alpha(),
+                               pygame.image.load('assets/images/planta.png').convert_alpha(),
+                               pygame.image.load('assets/images/planta.png').convert_alpha(),]
         hud_height = 200
         hud_width = 500
         hud_image = pygame.image.load('assets/images/hud.png').convert_alpha()
         self.hud_image = pygame.transform.scale(hud_image, (hud_width, hud_height))
+
+
 
     def init_defense_buttons(self):
         button_width = 60
         button_height = 60
         button_margin = 20
         start_x = 120
+        # for i in range(4):
+        #     x = start_x + i * (button_width + button_margin)
+        #     y = 20
+        #     defense_pic = pygame.image.load("assets/images/zombie/zombie_walk3.png").convert_alpha()
+        #     defense_pic = pygame.transform.scale(defense_pic, (button_width, button_height))
+        #     button.image = defense_pic
+        #     button = pygame.Rect(x, y, button_width, button_height)
+        #     self.defense_buttons.append(button)
+        # self.bg_end_x = self.defense_buttons[-1].right + 30
         for i in range(4):
             x = start_x + i * (button_width + button_margin)
             y = 20
             button = pygame.Rect(x, y, button_width, button_height)
             self.defense_buttons.append(button)
         self.bg_end_x = self.defense_buttons[-1].right + 30
-
     def draw(self):
         self.screen.blit(self.hud_image, (-20, -50))
 
@@ -39,8 +53,18 @@ class HUD:
         money_display = self.font.render(f"{self.money}", True, (255, 255, 0))
         self.screen.blit(money_display, (money_display_x, coin_y))
 
-        for button in self.defense_buttons:
+        # for button in self.defense_buttons:
+        #     # pygame.draw.rect(self.screen, (255, 255, 255), button)
+        #     self.screen.blit(button.image, (self.x, self.y))
+
+        for button, defense_image in zip(self.defense_buttons, self.defense_images):
+            button_width = 60
+            button_height = 60
             pygame.draw.rect(self.screen, (255, 255, 255), button)
+            button_center = button.center
+            defense_image = pygame.transform.scale(defense_image, (button_width, button_height))
+            image_rect = defense_image.get_rect(center=button_center)
+            self.screen.blit(defense_image, image_rect.topleft)
 
         if self.pause_button:
             self.pause_button.draw()
