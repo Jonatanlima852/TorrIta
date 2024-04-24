@@ -11,7 +11,6 @@ class Tower:
         self.health = health
         self.frames = load_gif_frames(background_image, self.width, self.height)
         self.current_frame = 0
-        self.animation_speed = 0.1  # Ajuste isso conforme a velocidade desejada da animação
         self.last_update = pygame.time.get_ticks()
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.active = True
@@ -24,7 +23,7 @@ class Tower:
         if self.health <= 0 :
             self.kill()
         now = pygame.time.get_ticks()
-        if now - self.last_update > 1000 * self.animation_speed:
+        if now - self.last_update > 2000/(len(self.frames)):
             self.last_update = now
             self.current_frame = (self.current_frame + 1) % len(self.frames)
         

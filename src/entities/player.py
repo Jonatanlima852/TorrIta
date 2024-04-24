@@ -67,7 +67,8 @@ class Player:
                 if allowed and self.money >= 100:
                     # background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
                     # background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
-                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
+                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/gifs/rui_atirando.gif")
+                    # new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
                     self.money -= 100
                     self.hud.update_money(self.money)
                     self.towers.append(new_tower)
@@ -79,7 +80,8 @@ class Player:
             # verifica se a torre morreu/está inativa
             if not tower.active:
                 self.towers.remove(tower)
-            tower.update()
+            if tower.verify_to_shoot(enemies):
+                tower.update()
             # Tenta atirar se tiver passado o intervalo de tempo
             bullet = tower.try_to_shoot(current_time, enemies)
             if bullet:
