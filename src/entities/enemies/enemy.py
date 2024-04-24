@@ -4,7 +4,7 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Enemy:
     def __init__(self, x, y, size, health, damage, speed, images):
-        self.x = x
+        self.x = x - 2*SCREEN_WIDTH/11
         self.y = y
         self.size = size
         self.speed = speed
@@ -13,7 +13,7 @@ class Enemy:
         self.zombie_walk = images
         self.image = self.zombie_walk[0]
         self.animation_index = 0
-        self.animation_speed = 20  # Aumente este valor para diminuir a velocidade da animação
+        self.animation_speed = 40  # Aumente este valor para diminuir a velocidade da animação
         self.animation_counter = 0
         self.rect = pygame.Rect(self.x, self.y+50, size, size)
         self.active = True
@@ -24,7 +24,7 @@ class Enemy:
         
         
         
-        self.x = x
+        self.x = x - 2*SCREEN_WIDTH/11
         self.y = y
         self.size = size
         self.speed = speed
@@ -39,7 +39,7 @@ class Enemy:
         self.zombie_walk = [zombie_walk1, zombie_walk2, zombie_walk3, zombie_walk2]
         self.image = self.zombie_walk[0]
         self.animation_index = 0
-        self.animation_speed = 20  # Aumente este valor para diminuir a velocidade da animação
+        self.animation_speed = 40  # Aumente este valor para diminuir a velocidade da animação
         self.animation_counter = 0
         self.rect = pygame.Rect(self.x,self.y+50,size,size)
         self.active = True
