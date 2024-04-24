@@ -14,6 +14,7 @@ class Menu:
         self.pause_button = Button(SCREEN_WIDTH - 80, 10, pause_button_image, 0.1, self.screen)
         self.game_paused = False
         self.game_over = False
+        self.win = False
         self.selected_difficulty = "normal"
         self.background_image = pygame.image.load('assets/images/background_menu.png').convert()
         self.background_image = pygame.transform.scale(self.background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -157,6 +158,47 @@ class Menu:
 
             # Desenha o texto de game over
             self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "SE DEU MAL!", fontpause, self.screen, (255, 0, 0))  # Texto vermelho
+
+            # Desenha e verifica se os botões estão sob o mouse
+            posicao_mouse = pygame.mouse.get_pos()
+            botao_voltar.check_hover(posicao_mouse)
+            botao_voltar.draw()
+            botao_sair.check_hover(posicao_mouse)
+            botao_sair.draw()
+
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if botao_voltar.rect.collidepoint(event.pos):
+                        self.game_paused = False
+                        return "restart"  # Indica que o usuário quer reiniciar o jogo
+                    elif botao_sair.rect.collidepoint(event.pos):
+                        pygame.quit()
+                        sys.exit()
+                        return
+
+            clock.tick(60)
+
+    def win_menu(self):
+        fontpause = pygame.font.SysFont(None, 90)
+        font = pygame.font.SysFont(None, 56)
+        clock = pygame.time.Clock()
+
+        # Botão para sair
+        botao_sair = ButtonEscrito(self.screen, "Sair", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80, font, (255,255,255), (100, 100, 255))
+        # Botão para voltar ao menu inicial
+        botao_voltar = ButtonEscrito(self.screen, "Voltar ao Menu Inicial", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, font, (255,255,255), (100, 100, 255))
+
+        running = True
+        while running:
+            self.screen.fill((0, 0, 0))  # Preenche a tela com preto
+
+            # Desenha o texto de game over
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "VENCEU!", fontpause, self.screen, (0, 255, 0))  # Texto vermelho
 
             # Desenha e verifica se os botões estão sob o mouse
             posicao_mouse = pygame.mouse.get_pos()

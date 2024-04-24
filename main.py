@@ -17,10 +17,17 @@ def main():
 
     clock = pygame.time.Clock()
     game = Game(screen, menu.selected_difficulty, menu)
+    start_time = pygame.time.get_ticks()
 
     running = True
 
     while running:
+        current_time = pygame.time.get_ticks()
+        if current_time - start_time >= 300000:
+            reiniciar = menu.win_menu()
+            if reiniciar == "restart":
+                main()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -33,6 +40,8 @@ def main():
             reiniciar = menu.gameover_menu() 
             if reiniciar == "restart":
                 main()
+        
+
 
         else:
             # Atualizações do jogo
