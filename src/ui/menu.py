@@ -156,7 +156,7 @@ class Menu:
             self.screen.fill((0, 0, 0))  # Preenche a tela com preto
 
             # Desenha o texto de game over
-            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "SE FUDEU!", fontpause, self.screen, (255, 0, 0))  # Texto vermelho
+            self.draw_text(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200, "SE DEU MAL!", fontpause, self.screen, (255, 0, 0))  # Texto vermelho
 
             # Desenha e verifica se os botões estão sob o mouse
             posicao_mouse = pygame.mouse.get_pos()
