@@ -10,7 +10,7 @@ from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT, COR_FUNDO, COR_HOVER
 class Menu:
     def __init__(self, screen):
         self.screen = screen
-        pause_button_image = pygame.image.load('pause.png').convert_alpha()
+        pause_button_image = pygame.image.load('assets/images/pause.png').convert_alpha()
         self.pause_button = Button(SCREEN_WIDTH - 80, 10, pause_button_image, 0.1, self.screen)
         self.game_paused = False
         self.selected_difficulty = "normal"
