@@ -11,7 +11,7 @@ class Game:
         self.screen = screen
         self.attack  = Attack(dificuldade)
         self.grid = Grid(SCREEN_HEIGHT/6, SCREEN_WIDTH/11, 5, 9)
-        self.hud = HUD(screen, 1000)  # Inicializa o HUD
+        self.hud = HUD(screen, 1000, 5)  # Inicializa o HUD
         self.player = Player(self.grid, self.hud, SCREEN_WIDTH/11, SCREEN_HEIGHT/6, menu)
         self.dificuldade = dificuldade
         

@@ -15,7 +15,7 @@ class HUD:
         heart_image = pygame.image.load('assets/images/coracao.png').convert_alpha()
         self.coin_image = pygame.transform.scale(coin_image, (32, 32))
         self.heart_image = pygame.transform.scale(heart_image, (25, 25))
-        self.defense_images = [pygame.image.load('assets/images/planta.png').convert_alpha(),
+        self.defense_images = [pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),
                                pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),]
@@ -79,3 +79,16 @@ class HUD:
 
     def update_money(self, new_money):
         self.money = new_money
+
+    
+    def update_life(self, new_life):
+        self.life = new_life
+
+    def update(self):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for i, button in enumerate(self.defense_buttons):
+                    if button.collidepoint(mouse_pos):
+                        self.selected_defense_index = i
+                        # Faça algo com o índice selecionado, como alterar a torre atualmente selecionada

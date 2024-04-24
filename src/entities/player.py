@@ -30,6 +30,34 @@ class Player:
         self.life = 5
         self.menu = menu
 
+        # possíveis defesas da classe
+        self.defenses = [
+            {
+                "index": 0,
+                "price": 100,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_rui.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/gifs/rui_atirando.gif",
+            },
+            {
+                "index": 1,
+                "price": 100,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/planta.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/images/prantinha.gif",
+            },
+            {
+                "index": 2,
+                "price": 100,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_rui.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/gifs/rui_atirando.gif",
+            },
+            {
+                "index": 3,
+                "price": 100,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/planta.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/images/prantinha.gif",
+            }
+        ]
+
 
 
     def update(self, enemies):
