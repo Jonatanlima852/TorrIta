@@ -23,7 +23,7 @@ def main():
 
     while running:
         current_time = pygame.time.get_ticks()
-        if current_time - start_time >= 300000:
+        if current_time - start_time >= 3000:
             reiniciar = menu.win_menu()
             if reiniciar == "restart":
                 main()

@@ -2,7 +2,7 @@ import pygame
 from src.settings import SCREEN_WIDTH
 
 class Bullet:
-    def __init__(self, x, y, size, speed, damage, durability):
+    def __init__(self, x, y, size, speed, damage, image, durability):
         self.x = x
         self.y = y
         self.size = size
@@ -10,7 +10,7 @@ class Bullet:
         self.damage = damage
         self.durability = durability
         self.active = True
-        self.image = pygame.image.load("assets/images/tiro.png")
+        self.image = image
         self.rect = pygame.Rect(self.x, self.y, size, size)
 
     def update(self, enemies):
