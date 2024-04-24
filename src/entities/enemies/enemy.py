@@ -22,31 +22,6 @@ class Enemy:
         self.last_attack_time = 0
         self.interval_damage = 1000
         
-        
-        
-        self.x = x
-        self.y = y
-        self.size = size
-        self.speed = speed
-        self.health = health 
-        self.damage = damage
-        zombie_walk1 = pygame.image.load("assets/images/zombie/zombie_walk1.png").convert_alpha()
-        zombie_walk1 = pygame.transform.scale(zombie_walk1, (SCREEN_WIDTH/11, SCREEN_HEIGHT/6))
-        zombie_walk2 = pygame.image.load("assets/images/zombie/zombie_walk2.png").convert_alpha()
-        zombie_walk2 = pygame.transform.scale(zombie_walk2, (SCREEN_WIDTH/11, SCREEN_HEIGHT/6))
-        zombie_walk3 = pygame.image.load("assets/images/zombie/zombie_walk3.png").convert_alpha()
-        zombie_walk3 = pygame.transform.scale(zombie_walk3, (SCREEN_WIDTH/11, SCREEN_HEIGHT/6))
-        self.zombie_walk = [zombie_walk1, zombie_walk2, zombie_walk3, zombie_walk2]
-        self.image = self.zombie_walk[0]
-        self.animation_index = 0
-        self.animation_speed = 20  # Aumente este valor para diminuir a velocidade da animação
-        self.animation_counter = 0
-        self.rect = pygame.Rect(self.x,self.y+50,size,size)
-        self.active = True
-        self.is_attacking = False
-        self.target = None
-        self.last_attack_time = 0
-        self.interval_damage = 1000
 
     def update(self, towers):
         if not self.is_attacking:
@@ -114,9 +89,9 @@ class WeakEnemy(Enemy):
 class StrongEnemy(Enemy):
     def __init__(self, x, y, size, health, damage, speed):
         images = load_images([
-            "assets/images/zombie/zombie_walk1.png",
-            "assets/images/zombie/zombie_walk2.png",
-            "assets/images/zombie/zombie_walk3.png",
-            "assets/images/zombie/zombie_walk2.png"
+            "assets/images/zombie/flechado_1.png",
+            "assets/images/zombie/flechado_2.png",
+            "assets/images/zombie/flechado_3.png",
+            "assets/images/zombie/flechado_2.png"
         ])
         super().__init__(x, y, size, health, damage, speed, images)
