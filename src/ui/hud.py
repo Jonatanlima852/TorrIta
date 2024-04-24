@@ -18,7 +18,7 @@ class HUD:
         self.defense_images = [pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
                                pygame.image.load('assets/images/defesa_petismo.jpg').convert_alpha(),
                                pygame.image.load('assets/images/defesa_bibs.jpg').convert_alpha(),
-                               pygame.image.load('assets/images/planta.png').convert_alpha(),]
+                               pygame.image.load('assets/images/Red_Bull.png').convert_alpha(),]
         self.selected_defense_index = 0  # Índice da defesa selecionada (exemplo)
         hud_height = 200
         hud_width = 500

@@ -13,7 +13,7 @@ class Player:
         self.money = self.hud.money # Dinheiro inicial, pode ser modificado ou ajustado conforme a dificuldade
         self.width_of_grid = width_of_grid
         self.height_of_grid = height_of_grid
-        self.image_tower_opaque = pygame.image.load("assets/images/planta.png").convert_alpha() #.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) # Exemplo para 50% de opacidade
+        self.image_tower_opaque = pygame.image.load("assets/images/Red_Bull.png").convert_alpha() #.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) # Exemplo para 50% de opacidade
         self.image_tower_opaque = pygame.transform.scale(self.image_tower_opaque, (self.width_of_grid, self.height_of_grid))
         #self.image_tower_opaque = self.image_tower_opaque.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT)
 
@@ -59,9 +59,9 @@ class Player:
             {
                 "index": 3,
                 "price": 100,
-                "shot_interval": 2000,
+                "shot_interval": 1000000000,
                 "health": 20,
-                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/planta.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/Red_Bull.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
                 "gif": "assets/images/prantinha.gif",
             }
         ]
