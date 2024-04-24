@@ -5,7 +5,7 @@ from src.ui.grid import Grid
 
 DEBOUNCE_INTERVAL = 500
 class Player:
-    def __init__(self, grid, hud, width_of_grid, height_of_grid):
+    def __init__(self, grid, hud, width_of_grid, height_of_grid, game):
         self.towers = []
         self.bullets = []
         self.grid = grid  # Verificar se é possível melhorar a lógica disso
@@ -26,13 +26,15 @@ class Player:
         # Desenhe sua imagem na superfície transparente
         self.surface_transparent.blit(self.image_tower_opaque, (0, 0))  # Desenhe no canto superior esquerdo da superfície transparente
         self.last_click_time = 0
+        self.game = game
+        self.life = 5
 
 
     def update(self, enemies):
         self.update_towers(enemies)
         self.update_bullets(enemies)
         self.update_coins()
-        self.update_life()
+        self.update_life(enemies)
 
 
     def draw(self, screen):
@@ -104,5 +106,13 @@ class Player:
         pass
 
 
-    def update_life(self):
-        pass
+    def update_life(self, enemies):
+        for enemy in enemies:
+            if enemy.x < 10:
+                self.life -= 1
+                enemies. remove(enemy)
+        if self.life <= 0:
+            self.game_over()
+
+    def game_over(self):
+        self.game.game_over_screen()
