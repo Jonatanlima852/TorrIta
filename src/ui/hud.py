@@ -17,10 +17,13 @@ class HUD:
         self.heart_image = pygame.transform.scale(heart_image, (25, 25))
         self.defense_images = [pygame.image.load('assets/images/planta.png').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),
-                               pygame.image.load('assets/images/planta.png').convert_alpha(),
+                               pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),]
+        self.selected_defense_index = 0  # Índice da defesa selecionada (exemplo)
         hud_height = 200
         hud_width = 500
+        selection_indicator = pygame.image.load('assets/images/focus.png').convert_alpha()
+        self.selection_indicator = pygame.transform.scale(selection_indicator, (70, 70))
         hud_image = pygame.image.load('assets/images/hud.png').convert_alpha()
         self.hud_image = pygame.transform.scale(hud_image, (hud_width, hud_height))
 
@@ -37,6 +40,8 @@ class HUD:
             button = pygame.Rect(x, y, button_width, button_height)
             self.defense_buttons.append(button)
         self.bg_end_x = self.defense_buttons[-1].right + 30
+
+
     def draw(self):
         self.screen.blit(self.hud_image, (-20, -50))
 
@@ -61,11 +66,16 @@ class HUD:
             image_rect = defense_image.get_rect(center=button_center)
             self.screen.blit(defense_image, image_rect.topleft)
 
+        self.update()  # Índice da defesa selecionada (exemplo)
+        selected_button = self.defense_buttons[self.selected_defense_index]
+
+        # Desenha a imagem de indicação de seleção sobre o botão selecionado
+        button_center = selected_button.center
+        indicator_rect = self.selection_indicator.get_rect(center=button_center)
+        self.screen.blit(self.selection_indicator, indicator_rect.topleft)
+
         if self.pause_button:
             self.pause_button.draw()
 
     def update_money(self, new_money):
         self.money = new_money
-
-    def update_life(self, new_heart):
-        self.life = new_heart

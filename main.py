@@ -9,13 +9,14 @@ from src.ui.hud import HUD
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.mouse.set_cursor(*pygame.cursors.tri_left)
     pygame.display.set_caption("TorrIta")
     
     menu = Menu(screen)
     menu.main_menu()
 
     clock = pygame.time.Clock()
-    game = Game(screen, menu.selected_difficulty)
+    game = Game(screen, menu.selected_difficulty, menu)
 
     running = True
 
@@ -26,6 +27,10 @@ def main():
 
         if menu.game_paused:
             reiniciar = menu.pause_menu() 
+            if reiniciar == "restart":
+                main()
+        if menu.game_over:
+            reiniciar = menu.gameover_menu() 
             if reiniciar == "restart":
                 main()
 

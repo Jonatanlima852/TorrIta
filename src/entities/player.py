@@ -5,7 +5,7 @@ from src.ui.grid import Grid
 
 DEBOUNCE_INTERVAL = 500
 class Player:
-    def __init__(self, grid, hud, width_of_grid, height_of_grid, game):
+    def __init__(self, grid, hud, width_of_grid, height_of_grid, menu):
         self.towers = []
         self.bullets = []
         self.grid = grid  # Verificar se é possível melhorar a lógica disso
@@ -24,10 +24,12 @@ class Player:
         self.surface_transparent.set_alpha(128)  # 50% de opacidade
 
         # Desenhe sua imagem na superfície transparente
-        self.surface_transparent.blit(self.image_tower_opaque, (0, 0))  # Desenhe no canto superior esquerdo da superfície transparente
+        # self.surface_transparent.blit(self.image_tower_opaque, (0, 0))  # Desenhe no canto superior esquerdo da superfície transparente
         self.last_click_time = 0
-        self.game = game
-        self.life = self.hud.life
+        # self.game = game
+        self.life = 5
+        self.menu = menu
+
 
 
     def update(self, enemies):
@@ -41,9 +43,11 @@ class Player:
         # Desenha prévia da Torre
         x, y = pygame.mouse.get_pos()
         allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
-        if allowed and self.money >= 100:
+        index_defesa = self.hud.selected_defense_index
+
+        if allowed and self.money >= self.defenses[index_defesa]["price"]:
             # pygame.draw.rect(screen, self.color, (x_ret, y_ret, w, h))
-            screen.blit(self.image_tower_opaque, (x_ret, y_ret))
+            screen.blit(self.defenses[index_defesa]["img_estatica"], (x_ret, y_ret))
             screen.blit(self.surface_transparent, (x_ret, y_ret))
 
 
@@ -65,13 +69,16 @@ class Player:
             if current_time - self.last_click_time > DEBOUNCE_INTERVAL:
                 x, y = pygame.mouse.get_pos()
                 allowed, x_ret, y_ret = self.grid.retify_to_grid(x, y)
+                
 
-                if allowed and self.money >= 100:
+                index_defesa = self.hud.selected_defense_index
+
+                if allowed and self.money >= self.defenses[index_defesa]["price"]:
                     # background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
                     # background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
-                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/gifs/rui_atirando.gif")
+                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, self.defenses[index_defesa]["gif"])
                     # new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
-                    self.money -= 100
+                    self.money -= self.defenses[index_defesa]["price"]
                     self.hud.update_money(self.money)
                     self.towers.append(new_tower)
                     self.grid.celula_ocupar(x, y)
@@ -116,4 +123,4 @@ class Player:
             self.game_over()
 
     def game_over(self):
-        self.game.game_over_screen()
+        self.menu.game_over = True
