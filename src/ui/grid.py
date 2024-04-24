@@ -20,8 +20,8 @@ class Grid:
         # Colocando imagem de fundo
         self.background_image_2 = pygame.image.load("assets/images/background_map.png")
         self.background_image_2 = pygame.transform.scale(self.background_image_2, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.background_image = pygame.image.load("assets/images/grama.png")  # Atualize com o caminho correto para sua imagem
-        self.background_image = pygame.transform.scale(self.background_image, (self.largura, self.altura))  # Ajusta a imagem ao tamanho da tela
+        self.background_image = pygame.image.load("assets/images/grama.png")  
+        self.background_image = pygame.transform.scale(self.background_image, (self.largura, self.altura))  
 
     def desenhar_fundo(self, screen):
         screen.blit(self.background_image_2, (0,0))
