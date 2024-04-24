@@ -84,6 +84,7 @@ class HUD:
     def update_life(self, new_life):
         self.life = new_life
 
+    # seleciona a torre para usar no player
     def update(self):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -91,4 +92,4 @@ class HUD:
                 for i, button in enumerate(self.defense_buttons):
                     if button.collidepoint(mouse_pos):
                         self.selected_defense_index = i
-                        # Faça algo com o índice selecionado, como alterar a torre atualmente selecionada
+                        

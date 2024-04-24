@@ -41,7 +41,9 @@ class Grid:
         self.matriz_ocupacao[linha][coluna] = True
     
     # Limpar célula específica
-    def limpar_celula(self, linha, coluna):
+    def limpar_celula(self, x, y):
+        linha = int((x - self.x_inicial + 1) // (self.largura/self.num_of_columns)) # o mais 1 serve pra corrigir a aproximação
+        coluna = int((y - self.y_inicial + 1) // (self.altura/self.num_of_lines)) #o mais 1 serve pra corrigir a aproximação
         self.matriz_ocupacao[linha][coluna] = False
 
     # Reinicia a matriz para o inicio

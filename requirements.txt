@@ -3,6 +3,6 @@
 
 pygame==2.0.1
 # numpy==1.19.5
-# Pillow==8.1.0
+Pillow==8.1.0
 # PyTMX==3.21.7
 # SQLAlchemy==1.3.23

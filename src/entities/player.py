@@ -45,7 +45,7 @@ class Player:
             {
                 "index": 1,
                 "price": 100,
-                "shot_interval": 1000000000,
+                "shot_interval": 10000000,
                 "health": 200,
                 "damage": 0,
                 "bullet_image": pygame.image.load("assets/images/tiro.png").convert_alpha(),
@@ -56,9 +56,9 @@ class Player:
                 "index": 2,
                 "price": 100,
                 "shot_interval": 3000,
-                "health": 10,
+                "health": 21,
                 "damage": 20,
-                "bullet_image": pygame.transform.scale(pygame.image.load("assets/images/foguinho.png").convert_alpha(), (25,25)),
+                "bullet_image": pygame.transform.scale(pygame.image.load("assets/images/foguinho.png").convert_alpha(), (30,30)),
                 "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_bibs.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
                 "gif": "assets/gifs/bibs_atirando.gif",
             },
@@ -66,9 +66,11 @@ class Player:
                 "index": 3,
                 "price": 100,
                 "shot_interval": 1000000000,
-                "health": 20,
+                "health": 21,
+                "damage": 0,
+                "bullet_image": pygame.transform.scale(pygame.image.load("assets/images/foguinho.png").convert_alpha(), (25,25)),
                 "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/Red_Bull.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
-                "gif": "assets/images/prantinha.gif",
+                "gif": "assets/images/Red_Bull.png",
             }
         ]
 
@@ -127,16 +129,18 @@ class Player:
                     self.last_click_time = current_time
 
         # faz update da torre, mudando estado e atirando
-        for tower in self.towers:
+        for tower in self.towers[:]:
             # verifica se a torre morreu/está inativa
             if not tower.active:
                 self.towers.remove(tower)
-            if tower.verify_to_shoot(enemies):
-                tower.update()
-            # Tenta atirar se tiver passado o intervalo de tempo
-            bullet = tower.try_to_shoot(current_time, enemies)
-            if bullet:
-                self.bullets.append(bullet)
+                self.grid.limpar_celula(tower.x, tower.y)
+            else:
+                if tower.verify_to_shoot(enemies):
+                    tower.update()
+                # Tenta atirar se tiver passado o intervalo de tempo
+                bullet = tower.try_to_shoot(current_time, enemies)
+                if bullet:
+                    self.bullets.append(bullet)
                 
 
     def update_bullets(self, enemies):
