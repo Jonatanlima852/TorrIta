@@ -35,24 +35,32 @@ class Player:
             {
                 "index": 0,
                 "price": 100,
+                "shot_interval": 2000,
+                "health": 20,
                 "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_rui.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
                 "gif": "assets/gifs/rui_atirando.gif",
             },
             {
                 "index": 1,
                 "price": 100,
-                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/planta.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
-                "gif": "assets/images/prantinha.gif",
+                "shot_interval": 1000000000,
+                "health": 200,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_petismo.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/gifs/petismo_atirando.png",
             },
             {
                 "index": 2,
                 "price": 100,
-                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_rui.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
-                "gif": "assets/gifs/rui_atirando.gif",
+                "shot_interval": 10000,
+                "health": 20,
+                "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/defesa_bibs.jpg").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
+                "gif": "assets/gifs/bibs_atirando.gif",
             },
             {
                 "index": 3,
                 "price": 100,
+                "shot_interval": 2000,
+                "health": 20,
                 "img_estatica": pygame.transform.scale(pygame.image.load("assets/images/planta.png").convert_alpha(), (self.width_of_grid, self.height_of_grid)),
                 "gif": "assets/images/prantinha.gif",
             }
@@ -104,7 +112,7 @@ class Player:
                 if allowed and self.money >= self.defenses[index_defesa]["price"]:
                     # background_image = pygame.image.load("assets/images/prantinha.gif").convert_alpha()  # Atualize com o caminho correto para sua imagem
                     # background_image = pygame.transform.scale(background_image, (self.width_of_grid, self.height_of_grid))  # Ajusta a imagem ao tamanho da tela
-                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, self.defenses[index_defesa]["gif"])
+                    new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, self.defenses[index_defesa]["health"], self.defenses[index_defesa]["shot_interval"], self.defenses[index_defesa]["gif"])
                     # new_tower = Tower(x_ret, y_ret, self.width_of_grid, self.height_of_grid, 20, "assets/images/prantinha.gif")
                     self.money -= self.defenses[index_defesa]["price"]
                     self.hud.update_money(self.money)

@@ -16,8 +16,8 @@ class HUD:
         self.coin_image = pygame.transform.scale(coin_image, (32, 32))
         self.heart_image = pygame.transform.scale(heart_image, (25, 25))
         self.defense_images = [pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
-                               pygame.image.load('assets/images/defesa_petismo.png').convert_alpha(),
-                               pygame.image.load('assets/images/defesa_rui.jpg').convert_alpha(),
+                               pygame.image.load('assets/images/defesa_petismo.jpg').convert_alpha(),
+                               pygame.image.load('assets/images/defesa_bibs.jpg').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),]
         self.selected_defense_index = 0  # Índice da defesa selecionada (exemplo)
         hud_height = 200

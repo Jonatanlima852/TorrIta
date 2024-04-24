@@ -79,19 +79,19 @@ def load_images(paths):
 class WeakEnemy(Enemy):
     def __init__(self, x, y, size, health, damage, speed):
         images = load_images([
-            "assets/images/zombie/zombie_walk1.png",
-            "assets/images/zombie/zombie_walk2.png",
-            "assets/images/zombie/zombie_walk3.png",
-            "assets/images/zombie/zombie_walk2.png"
+            "assets/bolacha/1.png",
+            "assets/bolacha/2.png",
+            "assets/bolacha/3.png",
+            "assets/bolacha/2.png",
         ])
         super().__init__(x, y, size, health, damage, speed, images)
 
 class StrongEnemy(Enemy):
     def __init__(self, x, y, size, health, damage, speed):
         images = load_images([
-            "assets/images/zombie/flechado_1.png",
-            "assets/images/zombie/flechado_2.png",
-            "assets/images/zombie/flechado_3.png",
-            "assets/images/zombie/flechado_2.png"
+            "assets/goiano/1.png",
+            "assets/goiano/2.png",
+            "assets/goiano/3.png",
+            "assets/goiano/2.png",
         ])
         super().__init__(x, y, size, health, damage, speed, images)

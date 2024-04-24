@@ -2,7 +2,7 @@ import pygame
 from src.entities.bullets.bullet import Bullet
 from src.utils.gif_loader import load_gif_frames
 class Tower:
-    def __init__(self, x, y, width, height, health, background_image):
+    def __init__(self, x, y, width, height, health, shot_interval, background_image):
         self.x = x
         self.y = y
         self.range_radius = 10
@@ -16,7 +16,7 @@ class Tower:
         self.active = True
 
         self.last_shot_time = pygame.time.get_ticks()  # Armazena o momento do último tiro
-        self.shot_interval = 2000  # Intervalo em milissegundos
+        self.shot_interval = shot_interval  # Intervalo em milissegundos
         #self.background_image_opaque = background_image.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) # Exemplo para 50% de opacidade
 
     def update(self):
