@@ -15,8 +15,11 @@ class HUD:
                                pygame.image.load('assets/images/planta.png').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),
                                pygame.image.load('assets/images/planta.png').convert_alpha(),]
+        self.selected_defense_index = 0  # Índice da defesa selecionada (exemplo)
         hud_height = 200
         hud_width = 500
+        selection_indicator = pygame.image.load('assets/images/focus.png').convert_alpha()
+        self.selection_indicator = pygame.transform.scale(selection_indicator, (70, 70))
         hud_image = pygame.image.load('assets/images/hud.png').convert_alpha()
         self.hud_image = pygame.transform.scale(hud_image, (hud_width, hud_height))
 
@@ -27,21 +30,14 @@ class HUD:
         button_height = 60
         button_margin = 20
         start_x = 120
-        # for i in range(4):
-        #     x = start_x + i * (button_width + button_margin)
-        #     y = 20
-        #     defense_pic = pygame.image.load("assets/images/zombie/zombie_walk3.png").convert_alpha()
-        #     defense_pic = pygame.transform.scale(defense_pic, (button_width, button_height))
-        #     button.image = defense_pic
-        #     button = pygame.Rect(x, y, button_width, button_height)
-        #     self.defense_buttons.append(button)
-        # self.bg_end_x = self.defense_buttons[-1].right + 30
         for i in range(4):
             x = start_x + i * (button_width + button_margin)
             y = 20
             button = pygame.Rect(x, y, button_width, button_height)
             self.defense_buttons.append(button)
         self.bg_end_x = self.defense_buttons[-1].right + 30
+
+
     def draw(self):
         self.screen.blit(self.hud_image, (-20, -50))
 
@@ -66,8 +62,26 @@ class HUD:
             image_rect = defense_image.get_rect(center=button_center)
             self.screen.blit(defense_image, image_rect.topleft)
 
+        self.update()  # Índice da defesa selecionada (exemplo)
+        selected_button = self.defense_buttons[self.selected_defense_index]
+
+        # Desenha a imagem de indicação de seleção sobre o botão selecionado
+        button_center = selected_button.center
+        indicator_rect = self.selection_indicator.get_rect(center=button_center)
+        self.screen.blit(self.selection_indicator, indicator_rect.topleft)
+
         if self.pause_button:
             self.pause_button.draw()
 
     def update_money(self, new_money):
         self.money = new_money
+
+
+    def update(self):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for i, button in enumerate(self.defense_buttons):
+                    if button.collidepoint(mouse_pos):
+                        self.selected_defense_index = i
+                        # Faça algo com o índice selecionado, como alterar a torre atualmente selecionada

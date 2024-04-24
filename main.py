@@ -9,6 +9,7 @@ from src.ui.hud import HUD
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.mouse.set_cursor(*pygame.cursors.tri_left)
     pygame.display.set_caption("TorrIta")
     
     menu = Menu(screen)
